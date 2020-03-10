@@ -29,3 +29,39 @@ body {
   font-family: Lato;
   font-size: 18px;
 }
+#caption-big {
+  margin: 130px auto;
+  padding: 0 25%;
+  text-align: center;
+}
+#caption-big .caption-text {
+  color: #575757;
+  font-family: Yu Gothic;
+  font-weight: normal;
+  font-size: 50px;
+}
+#caption-big .caption-buttons {
+  margin: 60px 0;
+}
+#caption-big a {
+  margin: 0 5px;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-family: Segoe UI;
+  font-size: 21px;
+}
+#caption-big .new-caption {
+  padding: 15px 20px;
+  background-color: #4d089a;
+}
+#caption-big .copy-btn {
+  padding: 15px 30px;
+  color: #323edd;
+  border: 2px solid #323edd;
+  transition: all 0.3s ease-in-out;
+}
+#caption-big .copy-btn:hover {
+  color: white;
+  background-color: #323edd;
+}
