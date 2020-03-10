@@ -14,17 +14,22 @@
         <a href="/">CaptionIngo</a>
       </div>
       <div class="navbar-content">
-        <a href="/browse.html" class="nav-link">Browse Captions</a>
+        <a href="/" class="nav-link">Home</a>
       </div>
     </section>
     <!-- Content -->
-    <section id="caption-big">
-      <h2 class="caption-text">
-        When you can't find the sunshine, be the sunshine.
-      </h2>
-      <div class="caption-buttons">
-        <a href="#" class="new-caption">Generate New Caption</a>
-        <a href="#" class="copy-btn">Copy</a>
+    <section id="browse-captions">
+      <h3>Browse Captions</h3>
+      <!-- Search Box -->
+      <div class="search-area">
+        <form action="/browse.html" method="GET">
+          <input type="text" name="query" placeholder="Search Caption" />
+          <select name="category">
+            <option value="all">Category</option>
+            <option value="attitude">Attitude</option>
+          </select>
+          <button>Search</button>
+        </form>
       </div>
     </section>
     <!-- Footer -->
