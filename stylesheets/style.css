@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
 }
-
+/* Navbar */
 #navbar {
   width: 100%;
   height: 60px;
@@ -29,6 +29,7 @@ body {
   font-family: Lato;
   font-size: 18px;
 }
+/* Content */
 #caption-big {
   margin: 130px auto;
   padding: 0 25%;
@@ -64,4 +65,25 @@ body {
 #caption-big .copy-btn:hover {
   color: white;
   background-color: #323edd;
+}
+/* Footer */
+#footer {
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%);
+}
+#footer .footer-text {
+  color: #707070;
+  font-family: Yu Gothic;
+  font-size: 15px;
+}
+#footer .footer-text span {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+}
+#footer .footer-text a {
+  color: #646fff;
+  text-decoration: none;
 }
