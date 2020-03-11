@@ -1,0 +1,15 @@
+{
+  "name": "captioningo",
+  "version": "1.0.0",
+  "description": "Free captions directory",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zahidul Hoque Fahim",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}
