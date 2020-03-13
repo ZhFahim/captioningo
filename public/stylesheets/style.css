@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   position: relative;
 }
+
 /* Navbar */
 #navbar {
   width: 100%;
@@ -34,17 +35,23 @@ body {
   font-family: Lato;
   font-size: 18px;
 }
+
 /* Content */
 #caption-big {
   margin: 130px auto;
-  padding: 0 25%;
+  padding: 0 15%;
   text-align: center;
 }
 #caption-big .caption-text {
+  height: 200px;
   color: #575757;
   font-family: Yu Gothic;
   font-weight: normal;
   font-size: 50px;
+  line-height: 1.5;
+  animation: motionIn 2s;
+  display: flex;
+  align-items: center;
 }
 #caption-big .caption-buttons {
   margin: 60px 0;
@@ -66,12 +73,13 @@ body {
   padding: 15px 30px;
   color: #323edd;
   border: 2px solid #323edd;
-  transition: all 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 #caption-big .copy-btn:hover {
   color: white;
   background-color: #323edd;
 }
+
 /* Footer */
 #footer {
   text-align: center;
@@ -93,6 +101,7 @@ body {
   color: #646fff;
   text-decoration: none;
 }
+
 /* Browse Captions */
 #browse-captions {
   padding-bottom: 50px;
@@ -148,6 +157,7 @@ body {
   color: white;
   background-color: #323edd;
 }
+
 /* Captions */
 .captions table {
   width: 100%;
@@ -206,4 +216,14 @@ body {
 }
 .pagination li.active {
   background-color: #4d089a;
+}
+
+/* Animations */
+@keyframes motionIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
