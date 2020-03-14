@@ -31,8 +31,33 @@ app.get("/", function(req, res) {
 
 // Browse captions
 app.get("/browse", function(req, res) {
-  res.render("browse");
+  if (req.query.text) {
+    // Display captions based on query
+    var text = new RegExp(escapeRegex(req.query.text), "gi");
+    Caption.find({ text: text }, function(err, captions) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("browse", { captions: captions });
+      }
+    });
+  } else {
+    // Fetch every captions from DB
+    Caption.find({}, function(err, captions) {
+      if (err) {
+        console.log(err);
+      } else {
+        // Render browse page with all captions
+        res.render("browse", { captions: captions });
+      }
+    });
+  }
 });
+
+// Escape regex in search query
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 // Run server
 app.listen(3000, function() {

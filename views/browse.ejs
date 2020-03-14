@@ -23,7 +23,7 @@
       <!-- Search Box -->
       <div class="search-area">
         <form action="/browse" method="GET">
-          <input type="text" name="query" placeholder="Search Caption" />
+          <input type="text" name="text" placeholder="Search Caption" />
           <select name="category">
             <option value="all">Category</option>
             <option value="attitude">Attitude</option>
@@ -32,96 +32,33 @@
         </form>
       </div>
       <!-- Caption List -->
-      <div class="captions">
-        <table>
-          <thead>
-            <tr>
-              <td>Caption</td>
-              <td>Used By</td>
-              <td>Copy</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                The happiest people don't have the best of everything, they make
-                the best of everything.
-              </td>
-              <td>5356</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Do more things that make you forget to check your phone.</td>
-              <td>5248</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                F.R.I.E.N.D.S. Fight for you. Respect you. Include you.
-                Encourage you. Need you. Deserve you. Stand by you.
-              </td>
-              <td>4312</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>She's the exclamation mark in the happiest sentence that I could ever possibly write.</td>
-              <td>3614</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Feelings are just visitors, let them come and go.
-              </td>
-              <td>3542</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Sorry for being late, I was enjoying my last few minutes of not being here.</td>
-              <td>2358</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Do not wait on the PERFECT MOMENT, take the minute and make it BEST.</td>
-              <td>1547</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>The great pleasure in life is doing what people say you cannot do.</td>
-              <td>1269</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Life is like a balloon. If you never let go, you will certainly not understand how high you can climb.</td>
-              <td>952</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Take a piece of my heart and make it all your own, so when we are apart, you’ll never be alone.</td>
-              <td>351</td>
-              <td>
-                <button>Copy</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <% if (captions.length > 0) { %>
+        <div class="captions">
+          <table>
+            <thead>
+              <tr>
+                <td>Caption</td>
+                <td>Used By</td>
+                <td>Copy</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% captions.forEach(function(caption) { %>
+                <tr>
+                  <td><%= caption.text %> </td>
+                  <td><%= caption.usedBy %> </td>
+                  <td><button>Copy</button></td>
+                </tr>
+              <% }) %> 
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="nocaption">
+          <h4>No Caption Found!</h4>
+          <p>Please search again.</p>
+        </div>
+      <% } %>
       <!-- Paginations -->
       <ul class="pagination">
         <li class="page active">1</li>
