@@ -8,7 +8,7 @@ var express = require("express"),
 // App config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-// seedDB();
+//seedDB();
 
 // DB config
 mongoose.connect("mongodb://localhost/captioningo", {
@@ -31,27 +31,38 @@ app.get("/", function(req, res) {
 
 // Browse captions
 app.get("/browse", function(req, res) {
+  // Retrive all categories from DB
+  var categories;
+  Caption.distinct("category", function(err, foundCategories) {
+    if (err) {
+      console.log(err);
+    } else {
+      categories = foundCategories;
+    }
+  });
+  // Make query object
+  var query = {};
+  // Check if user requests a query or not
   if (req.query.text) {
-    // Display captions based on query
-    var text = new RegExp(escapeRegex(req.query.text), "gi");
-    Caption.find({ text: text }, function(err, captions) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("browse", { captions: captions });
-      }
-    });
-  } else {
-    // Fetch every captions from DB
-    Caption.find({}, function(err, captions) {
-      if (err) {
-        console.log(err);
-      } else {
-        // Render browse page with all captions
-        res.render("browse", { captions: captions });
-      }
-    });
+    query.text = new RegExp(escapeRegex(req.query.text), "gi");
   }
+  if (req.query.category && req.query.category !== "all") {
+    query.category = req.query.category;
+  }
+  // Fetch captions based on query
+  Caption.find(query, function(err, captions) {
+    if (err) {
+      console.log(err);
+    } else {
+      // Render browse page based on query
+      res.render("browse", {
+        captions: captions,
+        categories: categories,
+        text: req.query.text,
+        reqCategory: req.query.category
+      });
+    }
+  });
 });
 
 // Escape regex in search query

@@ -23,10 +23,16 @@
       <!-- Search Box -->
       <div class="search-area">
         <form action="/browse" method="GET">
-          <input type="text" name="text" placeholder="Search Caption" />
+          <input type="text" name="text" placeholder="Search Caption" <% if (text) { %>
+           value="<%= text %>"
+          <% } %> />
           <select name="category">
-            <option value="all">Category</option>
-            <option value="attitude">Attitude</option>
+            <option value="all">All</option>
+            <% categories.forEach(function(category) { %>
+              <option value="<%= category %>" <% if (category === reqCategory) { %>
+                <%= "selected" %>
+              <% } %> ><%= category %></option>
+            <% }) %> 
           </select>
           <button>Search</button>
         </form>
