@@ -23,13 +23,13 @@
       <!-- Search Box -->
       <div class="search-area">
         <form action="/browse" method="GET">
-          <input type="text" name="text" placeholder="Search Caption" <% if (text) { %>
-           value="<%= text %>"
+          <input type="text" name="text" placeholder="Search Caption" <% if (queryText) { %>
+           value="<%= queryText %>"
           <% } %> />
           <select name="category">
             <option value="all">All</option>
             <% categories.forEach(function(category) { %>
-              <option value="<%= category %>" <% if (category === reqCategory) { %>
+              <option value="<%= category %>" <% if (category === queryCategory) { %>
                 <%= "selected" %>
               <% } %> ><%= category %></option>
             <% }) %> 
@@ -67,22 +67,12 @@
       <% } %>
       <!-- Paginations -->
       <ul class="pagination">
-        <li class="page active">1</li>
-        <li class="page">2</li>
-        <li class="page">3</li>
-        <li class="page">4</li>
-        <li class="page">5</li>
-        <li class="page">6</li>
-        <li class="page">7</li>
-        <li class="page">8</li>
-        <li class="page">9</li>
-        <li class="page">10</li>
-        <li class="page">11</li>
-        <li class="page">12</li>
-        <li class="page">13</li>
-        <li class="page">14</li>
-        <li class="page">15</li>
-      </div>
+        <% for(var i = 1; i <= pages; i++) { %>
+          <li class="page <% if (i == currentPage) { %><%= "active" %><% } %>">
+            <a href="?text=<%= queryText %>&category=<%= queryCategory %>&page=<%= i %>"><%= i %></a>
+          </li>
+        <% } %>
+      </ul>
     </section>
     <!-- Footer -->
     <section id="footer">
