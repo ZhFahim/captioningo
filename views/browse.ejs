@@ -6,6 +6,8 @@
     <title>CaptionIngo</title>
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Custom Script -->
+    <script src="/scripts/script.js"></script>
   </head>
   <body>
     <!-- Navbar -->
@@ -53,7 +55,7 @@
                 <tr>
                   <td><%= caption.text %> </td>
                   <td><%= caption.usedBy %> </td>
-                  <td><button>Copy</button></td>
+                  <td><button onclick='copyText("<%= caption.text %>")'>Copy</button></td>
                 </tr>
               <% }) %> 
             </tbody>
@@ -74,6 +76,8 @@
         <% } %>
       </ul>
     </section>
+    <!-- Copy message -->
+    <div class="msg">Copied to Clipboard!</div>
     <!-- Footer -->
     <section id="footer">
       <p class="footer-text">

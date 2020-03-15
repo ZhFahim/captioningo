@@ -6,6 +6,8 @@
     <title>CaptionIngo</title>
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Custom Script -->
+    <script src="/scripts/script.js"></script>
   </head>
   <body>
     <!-- Navbar -->
@@ -23,12 +25,16 @@
         <%= caption.text %>
       </h2>
       <div class="caption-buttons">
-        <a href="#" class="new-caption" onclick="window.location.reload(true);"
-          >Generate New Caption</a
-        >
-        <a href="#" class="copy-btn">Copy</a>
+        <button class="new-caption" onclick="window.location.reload(true);">
+          Generate New Caption
+        </button>
+        <button class="copy-btn" onclick="copyText('<%= caption.text %>')">
+          Copy
+        </button>
       </div>
     </section>
+    <!-- Copy message -->
+    <div class="msg">Copied to Clipboard!</div>
     <!-- Footer -->
     <section id="footer">
       <p class="footer-text">
