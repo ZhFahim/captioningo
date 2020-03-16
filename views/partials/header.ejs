@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CaptionIngo</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Custom Script -->
+    <script src="/scripts/script.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <section id="navbar">
+      <div class="navbar-logo">
+        <a href="/">CaptionIngo</a>
+      </div>
+      <div class="navbar-content">
+        <% if (typeof page !== "undefined" && page === "home") { %>
+        <a href="/browse" class="nav-link">Browse Captions</a>
+        <% } else { %>
+        <a href="/" class="nav-link">Home</a>
+        <% } %>
+      </div>
+    </section>

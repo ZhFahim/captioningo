@@ -1,45 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CaptionIngo</title>
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <!-- Custom Script -->
-    <script src="/scripts/script.js"></script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <section id="navbar">
-      <div class="navbar-logo">
-        <a href="/">CaptionIngo</a>
-      </div>
-      <div class="navbar-content">
-        <a href="/browse" class="nav-link">Browse Captions</a>
-      </div>
-    </section>
-    <!-- Content -->
-    <section id="caption-big">
-      <h2 class="caption-text">
-        <%= caption.text %>
-      </h2>
-      <div class="caption-buttons">
-        <button class="new-caption" onclick="window.location.reload(true);">
-          Generate New Caption
-        </button>
-        <button class="copy-btn" onclick="copyText('<%= caption.text %>')">
-          Copy
-        </button>
-      </div>
-    </section>
-    <!-- Copy message -->
-    <div class="msg">Copied to Clipboard!</div>
-    <!-- Footer -->
-    <section id="footer">
-      <p class="footer-text">
-        Made with <span> &#x2764;</span> by <a href="#">Zahidul Hoque Fahim</a>
-      </p>
-    </section>
-  </body>
-</html>
+<%- include("./partials/header") %>
+<!-- Content -->
+<section id="caption-big">
+  <h2 class="caption-text">
+    <%= caption.text %>
+  </h2>
+  <div class="caption-buttons">
+    <button class="new-caption" onclick="window.location.reload(true);">
+      Generate New Caption
+    </button>
+    <button class="copy-btn" onclick="copyText('<%= caption.text %>')">
+      Copy
+    </button>
+  </div>
+</section>
+<%- include("./partials/footer") %>

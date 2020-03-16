@@ -25,7 +25,7 @@ app.get("/", function(req, res) {
       console.log(err);
     } else {
       var randomNum = Math.floor(Math.random() * captions.length);
-      res.render("home", { caption: captions[randomNum] });
+      res.render("home", { caption: captions[randomNum], page: "home" });
     }
   });
 });
@@ -76,7 +76,8 @@ app.get("/browse", function(req, res) {
           pages: pages,
           currentPage: currentPage,
           queryText: req.query.text,
-          queryCategory: req.query.category
+          queryCategory: req.query.category,
+          page: "browse"
         });
       }
     });

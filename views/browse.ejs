@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CaptionIngo</title>
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <!-- Custom Script -->
-    <script src="/scripts/script.js"></script>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <section id="navbar">
-      <div class="navbar-logo">
-        <a href="/">CaptionIngo</a>
-      </div>
-      <div class="navbar-content">
-        <a href="/" class="nav-link">Home</a>
-      </div>
-    </section>
+<%- include("./partials/header") %>
     <!-- Content -->
     <section id="browse-captions">
       <h3>Browse Captions</h3>
@@ -30,11 +10,13 @@
           <% } %> />
           <select name="category">
             <option value="all">All</option>
-            <% categories.forEach(function(category) { %>
+            <% if (categories) { %>
+              <% categories.forEach(function(category) { %>
               <option value="<%= category %>" <% if (category === queryCategory) { %>
                 <%= "selected" %>
-              <% } %> ><%= category %></option>
-            <% }) %> 
+                <% } %> ><%= category %></option>
+              <% }) %> 
+            <% } %>
           </select>
           <button>Search</button>
         </form>
@@ -76,13 +58,4 @@
         <% } %>
       </ul>
     </section>
-    <!-- Copy message -->
-    <div class="msg">Copied to Clipboard!</div>
-    <!-- Footer -->
-    <section id="footer">
-      <p class="footer-text">
-        Made with <span> &#x2764;</span> by <a href="#">Zahidul Hoque Fahim</a>
-      </p>
-    </section>
-  </body>
-</html>
+<%- include("./partials/footer") %> 
