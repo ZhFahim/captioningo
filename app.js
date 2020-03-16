@@ -8,10 +8,11 @@ var express = require("express"),
 // App config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+require("dotenv").config();
 //seedDB();
 
 // DB config
-mongoose.connect("mongodb://localhost/captioningo", {
+mongoose.connect(process.env.DB_HOST, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });

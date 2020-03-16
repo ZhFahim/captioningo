@@ -78,6 +78,43 @@ var captions = [
     category: "love",
     usedBy: 195,
     language: "en"
+  },
+  {
+    text: "7 billion smiles, and yours is my favorite.",
+    author: "admin",
+    category: "love",
+    usedBy: 195,
+    language: "en"
+  },
+  {
+    text:
+      "Some people arrive and make such a beautiful impact on your life, you can barely remember what life was like without them.",
+    author: "admin",
+    category: "friends",
+    usedBy: 195,
+    language: "en"
+  },
+  {
+    text: "I'll stop wearing black when they make a darker color.",
+    author: "admin",
+    category: "attitude",
+    usedBy: 195,
+    language: "en"
+  },
+  {
+    text:
+      "Sometimes, someone comes into your life so unexpectedly, takes your heart by surprise, and changes your life forever.",
+    author: "admin",
+    category: "love",
+    usedBy: 195,
+    language: "en"
+  },
+  {
+    text: "Every day may not be good but there's good in every day.",
+    author: "admin",
+    category: "motivation",
+    usedBy: 195,
+    language: "en"
   }
 ];
 
