@@ -8,7 +8,7 @@
     <button class="new-caption" onclick="window.location.reload(true);">
       Generate New Caption
     </button>
-    <button class="copy-btn" onclick="copyText('<%= caption.text %>')">
+    <button class="copy-btn" data-clipboard-text="<%= caption.text %>">
       Copy
     </button>
   </div>

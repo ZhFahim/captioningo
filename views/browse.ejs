@@ -37,7 +37,7 @@
                 <tr>
                   <td><%= caption.text %> </td>
                   <td><%= caption.usedBy %> </td>
-                  <td><button onclick='copyText("<%= caption.text %>")'>Copy</button></td>
+                  <td><button class="copy-btn" data-clipboard-text="<%= caption.text %>">Copy</button></td>
                 </tr>
               <% }) %> 
             </tbody>
