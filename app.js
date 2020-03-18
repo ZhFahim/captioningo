@@ -83,6 +83,20 @@ app.get("/browse", function(req, res) {
     });
 });
 
+// Update usedBy property route
+app.get("/copy/:id", function(req, res) {
+  //Find the caption
+  Caption.findById(req.params.id, function(err, foundCaption) {
+    if (err) {
+      console.log(err);
+    } else {
+      foundCaption.usedBy++;
+      foundCaption.save();
+      res.send("Done!");
+    }
+  });
+});
+
 // Escape regex in search query
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

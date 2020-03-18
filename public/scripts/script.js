@@ -1,4 +1,17 @@
-// Display text copy message
+// Update usedBy property using AJAX
+var request = new XMLHttpRequest();
+function copy(captionId) {
+  var url =
+    window.location.protocol +
+    "//" +
+    window.location.host +
+    "/copy/" +
+    captionId;
+  request.open("GET", url);
+  request.send();
+}
+
+// Copy text to clipboard and display message
 var clipboard = new ClipboardJS(".copy-btn");
 var num;
 var msgDisplay = document.querySelector(".msg");
@@ -9,7 +22,6 @@ clipboard.on("success", function(e) {
   num = setTimeout(function() {
     msgDisplay.classList.remove("show");
   }, 3000);
-  console.log(e);
 });
 
 clipboard.on("error", function(e) {
@@ -19,5 +31,4 @@ clipboard.on("error", function(e) {
   num = setTimeout(function() {
     msgDisplay.classList.remove("show");
   }, 3000);
-  console.log(e);
 });
