@@ -448,6 +448,9 @@ body {
   .captions table tbody tr td {
     padding-left: 10px;
   }
+  .captions table tbody tr td:first-child {
+    width: 55%;
+  }
   .nocaption h4 {
     font-size: 30px;
   }

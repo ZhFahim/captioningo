@@ -45,19 +45,19 @@
             </tbody>
           </table>
         </div>
+        <!-- Paginations -->
+        <ul class="pagination">
+          <% for(var i = 1; i <= pages; i++) { %>
+            <li class="page <% if (i == currentPage) { %><%= "active" %><% } %>">
+              <a href="?text=<%= queryText %>&category=<%= queryCategory %>&page=<%= i %>"><%= i %></a>
+            </li>
+          <% } %>
+        </ul>
       <% } else { %>
         <div class="nocaption">
           <h4>No Caption Found!</h4>
           <p>Please search again.</p>
         </div>
       <% } %>
-      <!-- Paginations -->
-      <ul class="pagination">
-        <% for(var i = 1; i <= pages; i++) { %>
-          <li class="page <% if (i == currentPage) { %><%= "active" %><% } %>">
-            <a href="?text=<%= queryText %>&category=<%= queryCategory %>&page=<%= i %>"><%= i %></a>
-          </li>
-        <% } %>
-      </ul>
     </section>
 <%- include("./partials/footer") %> 

@@ -71,8 +71,9 @@ router.get("/browse", function(req, res) {
 router.get("/copy/:id", function(req, res) {
   //Find the caption
   Caption.findById(req.params.id, function(err, foundCaption) {
-    if (err) {
+    if (err || !foundCaption) {
       console.log(err);
+      res.send("Failed!");
     } else {
       foundCaption.usedBy++;
       foundCaption.save();
