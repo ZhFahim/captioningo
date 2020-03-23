@@ -82,6 +82,11 @@ router.get("/copy/:id", function(req, res) {
   });
 });
 
+// Show Login Form
+router.get("/login", function(req, res) {
+  res.render("login");
+});
+
 // Escape regex in search query
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
