@@ -1,6 +1,8 @@
 const express = require("express"),
   router = express.Router(),
-  Caption = require("../models/caption");
+  passport = require("passport"),
+  Caption = require("../models/caption"),
+  User = require("../models/user");
 
 // Display random caption at home page
 router.get("/", function(req, res) {
@@ -85,6 +87,25 @@ router.get("/copy/:id", function(req, res) {
 // Show Login Form
 router.get("/login", function(req, res) {
   res.render("login");
+});
+
+// Handle Login
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/dashboard",
+    failureRedirect: "login"
+  }),
+  function(req, res) {}
+);
+
+// Dashboard
+router.get("/dashboard", function(req, res) {
+  if (req.isAuthenticated()) {
+    res.render("dashboard");
+  } else {
+    return res.redirect("/login");
+  }
 });
 
 // Escape regex in search query

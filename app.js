@@ -2,11 +2,15 @@
 var express = require("express"),
   app = express(),
   mongoose = require("mongoose"),
+  passport = require("passport"),
+  localStrategy = require("passport-local"),
+  User = require("./models/user"),
   seedDB = require("./seedDB");
 
 // App config
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
+app.use(express.urlencoded({ extended: true }));
 require("dotenv").config();
 //seedDB();
 
@@ -15,6 +19,20 @@ mongoose.connect(process.env.DB_HOST, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+// Passport Config
+app.use(
+  require("express-session")({
+    secret: "CaptionIngo",
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Requring Routes
 var routes = require("./routes/index");
