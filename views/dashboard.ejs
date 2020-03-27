@@ -1,1 +1,183 @@
-<h1>Dashboard</h1>
+<%- include("./partials/header") %>
+<div class="container">
+  <h3 class="dashboard-header">Dashboard</h3>
+  <div class="statics">
+    <h4>Statistics</h4>
+    <div class="details">
+      <p>Total Caption: <strong>507</strong></p>
+      <p>Total Categories: <strong>16</strong></p>
+      <p>Total Used By: <strong>8986</strong></p>
+      <p>Total Hits: <strong>768</strong></p>
+      <p>Users Online: <strong>6</strong></p>
+    </div>
+  </div>
+  <div class="caption-control">
+    <div class="add-caption">
+      <h4 class="add-cap-header">Add New Caption</h4>
+      <form action="/dashboard" method="POST">
+        <textarea name="caption-text"></textarea>
+        <select>
+          <option value="all">Category</option>
+        </select>
+        <button class="submit">Submit</button>
+      </form>
+      <h4 class="captions-header">Captions</h4>
+      <!-- Search Box -->
+      <div class="search-area">
+        <form action="/dashboard" method="GET">
+          <input type="text" name="text" placeholder="Search Caption" />
+          <select name="category">
+            <option value="all">All</option>
+          </select>
+          <button>Search</button>
+        </form>
+      </div>
+      <!-- Caption List -->
+      <div class="captions">
+        <table>
+          <thead>
+            <tr>
+              <td>Caption</td>
+              <td>Used By</td>
+              <td>Edit</td>
+              <td>Delete</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Sometimes, someone comes into your life so unexpectedly, takes
+                your heart by surprise, and changes your life forever.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>Every day may not be good but there's good in every day.</td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                The happiest people don't have the best of everything, they make
+                the best of everything.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Sometimes, someone comes into your life so unexpectedly, takes
+                your heart by surprise, and changes your life forever.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>Every day may not be good but there's good in every day.</td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                The happiest people don't have the best of everything, they make
+                the best of everything.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Sometimes, someone comes into your life so unexpectedly, takes
+                your heart by surprise, and changes your life forever.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>Every day may not be good but there's good in every day.</td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                The happiest people don't have the best of everything, they make
+                the best of everything.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Sometimes, someone comes into your life so unexpectedly, takes
+                your heart by surprise, and changes your life forever.
+              </td>
+              <td>97</td>
+              <td>
+                <a href="#"><i class="edit-icon"></i></a>
+              </td>
+              <td>
+                <a href="#"><i class="trash-icon"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Paginations -->
+      <ul class="pagination">
+        <li class="page active">
+          <a href="?text=>&category=&page=">1</a>
+        </li>
+        <li class="page">
+          <a href="?text=>&category=&page=">2</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<%- include("./partials/footer") %>
