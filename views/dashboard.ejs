@@ -14,19 +14,33 @@
     <div class="add-caption">
       <h4 class="add-cap-header">Add New Caption</h4>
       <form action="/dashboard" method="POST">
-        <textarea name="caption-text"></textarea>
-        <select>
+        <textarea name="text" required></textarea>
+        <select name="category">
           <option value="all">Category</option>
+          <% if (categories) { %>
+            <% categories.forEach(function(category) { %>
+            <option value="<%= category %>"><%= category %></option>
+            <% }) %> 
+          <% } %>
         </select>
         <button class="submit">Submit</button>
       </form>
-      <h4 class="captions-header">Captions</h4>
+      <h4 class="captions-header">Manage Captions</h4>
       <!-- Search Box -->
       <div class="search-area">
         <form action="/dashboard" method="GET">
-          <input type="text" name="text" placeholder="Search Caption" />
-          <select name="category">
+          <input type="text" name="text" placeholder="Search Caption" <% if (queryText) { %>
+            value="<%= queryText %>"
+           <% } %> />
+           <select name="category">
             <option value="all">All</option>
+            <% if (categories) { %>
+              <% categories.forEach(function(category) { %>
+              <option value="<%= category %>" <% if (category === queryCategory) { %>
+                <%= "selected" %>
+                <% } %> ><%= category %></option>
+              <% }) %> 
+            <% } %>
           </select>
           <button>Search</button>
         </form>
@@ -43,138 +57,28 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                Sometimes, someone comes into your life so unexpectedly, takes
-                your heart by surprise, and changes your life forever.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>Every day may not be good but there's good in every day.</td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                The happiest people don't have the best of everything, they make
-                the best of everything.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Sometimes, someone comes into your life so unexpectedly, takes
-                your heart by surprise, and changes your life forever.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>Every day may not be good but there's good in every day.</td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                The happiest people don't have the best of everything, they make
-                the best of everything.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Sometimes, someone comes into your life so unexpectedly, takes
-                your heart by surprise, and changes your life forever.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>Every day may not be good but there's good in every day.</td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                The happiest people don't have the best of everything, they make
-                the best of everything.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Sometimes, someone comes into your life so unexpectedly, takes
-                your heart by surprise, and changes your life forever.
-              </td>
-              <td>97</td>
-              <td>
-                <a href="#"><i class="edit-icon"></i></a>
-              </td>
-              <td>
-                <a href="#"><i class="trash-icon"></i></a>
-              </td>
-            </tr>
+            <% captions.forEach(function(caption) { %>
+              <tr>
+                <td><%= caption.text %> </td>
+                <td><%= caption.usedBy %> </td>
+                <td>
+                  <a href="#"><i class="edit-icon"></i></a>
+                </td>
+                <td>
+                  <a href="#"><i class="trash-icon"></i></a>
+                </td>
+              </tr>
+            <% }) %> 
           </tbody>
         </table>
       </div>
       <!-- Paginations -->
       <ul class="pagination">
-        <li class="page active">
-          <a href="?text=>&category=&page=">1</a>
-        </li>
-        <li class="page">
-          <a href="?text=>&category=&page=">2</a>
-        </li>
+        <% for(var i = 1; i <= pages; i++) { %>
+          <li class="page <% if (i == currentPage) { %><%= "active" %><% } %>">
+            <a href="?text=<%= queryText %>&category=<%= queryCategory %>&page=<%= i %>"><%= i %></a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>
