@@ -2,7 +2,8 @@ const express = require("express"),
   router = express.Router(),
   passport = require("passport"),
   Caption = require("../models/caption"),
-  User = require("../models/user");
+  User = require("../models/user"),
+  Info = require("../models/info");
 
 // Display random caption at home page
 router.get("/", function(req, res) {
@@ -10,6 +11,12 @@ router.get("/", function(req, res) {
     if (err) {
       console.log(err);
     } else {
+      // Update Total Hits
+      Info.findOne({ name: "Hits" }, function(err, foundInfo) {
+        foundInfo.value++;
+        foundInfo.save();
+      });
+      // Generate random caption
       var randomNum = Math.floor(Math.random() * captions.length);
       res.render("home", { caption: captions[randomNum], page: "home" });
     }
@@ -102,7 +109,36 @@ router.post(
 // Dashboard
 router.get("/dashboard", function(req, res) {
   if (req.isAuthenticated()) {
-    res.render("dashboard");
+    // Get Statics
+    var statics = {};
+    // Total Captions
+    Caption.countDocuments({}, function(err, totalCaptions) {
+      statics.totalCaptions = totalCaptions;
+      // Total Categories
+      Caption.distinct("category", function(err, foundCategories) {
+        statics.totalCategories = foundCategories.length;
+        // Total Caption Used By
+        Caption.aggregate(
+          [
+            {
+              $group: {
+                _id: null,
+                totalUsedBy: { $sum: "$usedBy" }
+              }
+            }
+          ],
+          function(err, usedByResults) {
+            statics.totalUsedBy = usedByResults[0].totalUsedBy;
+            // Total Hits
+            Info.findOne({ name: "Hits" }, function(err, foundInfo) {
+              statics.totalHits = foundInfo.value;
+              console.log(statics);
+              res.render("dashboard", { statics: statics });
+            });
+          }
+        );
+      });
+    });
   } else {
     return res.redirect("/login");
   }

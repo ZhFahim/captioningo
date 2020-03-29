@@ -1,5 +1,6 @@
 var mongoose = require("mongoose"),
-  Caption = require("./models/caption.js");
+  Caption = require("./models/caption.js"),
+  Info = require("./models/info");
 
 // Demo Captions
 var captions = [
@@ -83,7 +84,7 @@ var captions = [
     text: "7 billion smiles, and yours is my favorite.",
     author: "admin",
     category: "love",
-    usedBy: 195,
+    usedBy: 745,
     language: "en"
   },
   {
@@ -91,14 +92,14 @@ var captions = [
       "Some people arrive and make such a beautiful impact on your life, you can barely remember what life was like without them.",
     author: "admin",
     category: "friends",
-    usedBy: 195,
+    usedBy: 157,
     language: "en"
   },
   {
     text: "I'll stop wearing black when they make a darker color.",
     author: "admin",
     category: "attitude",
-    usedBy: 195,
+    usedBy: 953,
     language: "en"
   },
   {
@@ -106,18 +107,21 @@ var captions = [
       "Sometimes, someone comes into your life so unexpectedly, takes your heart by surprise, and changes your life forever.",
     author: "admin",
     category: "love",
-    usedBy: 195,
+    usedBy: 348,
     language: "en"
   },
   {
     text: "Every day may not be good but there's good in every day.",
     author: "admin",
     category: "motivation",
-    usedBy: 195,
+    usedBy: 567,
     language: "en"
   }
 ];
 
 module.exports = function() {
   Caption.create(captions);
+  Info.create({
+    name: "Hits"
+  });
 };
