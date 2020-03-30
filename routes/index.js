@@ -169,7 +169,7 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
                 if (err) {
                   console.log(err);
                 } else {
-                  // Serve captions based on query
+                  // Serve statics and captions based on query
                   res.render("dashboard", {
                     statics: statics,
                     captions: captions,
@@ -196,6 +196,41 @@ router.post("/dashboard", isLoggedIn, function(req, res) {
       console.log(err);
     } else {
       // Redirect to dashboard
+      res.redirect("/dashboard");
+    }
+  });
+});
+
+// Edit Caption Page
+router.get("/dashboard/edit/:id", isLoggedIn, function(req, res) {
+  // Fetch all categories
+  Caption.distinct("category", function(err, categories) {
+    if (err) {
+      console.log(err);
+    } else {
+      // Find caption based on ID
+      Caption.findById(req.params.id, function(err, caption) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render("edit", { caption: caption, categories: categories });
+        }
+      });
+    }
+  });
+});
+
+// Update Caption
+router.post("/dashboard/edit/:id", isLoggedIn, function(req, res) {
+  // Find the caption from DB
+  Caption.findById(req.params.id, function(err, caption) {
+    if (err) {
+      console.log(err);
+    } else {
+      // Update the caption
+      caption.text = req.body.text;
+      caption.category = req.body.category;
+      caption.save();
       res.redirect("/dashboard");
     }
   });

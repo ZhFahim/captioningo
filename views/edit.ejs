@@ -1,0 +1,24 @@
+<%- include("./partials/header") %>
+<div class="container">
+  <h3 class="dashboard-header">Edit Caption</h3>
+  <form
+    class="edit-caption"
+    action="/dashboard/edit/<%= caption._id %>"
+    method="POST"
+  >
+    <textarea name="text"><%= caption.text %></textarea>
+    <select name="category">
+      <% if (categories) { %>
+        <% categories.forEach(function(category) { %>
+        <option value="<%= category %>" <% if (category === caption.category) { %>
+          <%= "selected" %>
+          <% } %> ><%= category %>
+        </option>
+        <% }) %> 
+      <% } %>
+    </select>
+    <button>Edit</button>
+  </form>
+</div>
+
+<%- include("./partials/footer") %>
