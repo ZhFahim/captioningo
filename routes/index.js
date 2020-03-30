@@ -236,6 +236,18 @@ router.post("/dashboard/edit/:id", isLoggedIn, function(req, res) {
   });
 });
 
+// Delete Caption
+router.delete("/dashboard/:id", isLoggedIn, function(req, res) {
+  // Delete the caption from DB
+  Caption.deleteOne({ _id: req.params.id }, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("Caption deleted!");
+    }
+  });
+});
+
 // Escape regex in search query
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

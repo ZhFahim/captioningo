@@ -1,13 +1,7 @@
 // Update usedBy property using AJAX
 var request = new XMLHttpRequest();
 function copy(captionId) {
-  var url =
-    window.location.protocol +
-    "//" +
-    window.location.host +
-    "/copy/" +
-    captionId;
-  request.open("GET", url);
+  request.open("GET", "/copy/" + captionId);
   request.send();
 }
 
@@ -32,3 +26,16 @@ clipboard.on("error", function(e) {
     msgDisplay.classList.remove("show");
   }, 3000);
 });
+
+// Delete caption
+function deleteCaption(captionId) {
+  var request = new XMLHttpRequest();
+  var confirmMsg = prompt(
+    "Do you really want to delete? Type 'YES' to proceed."
+  );
+  if (confirmMsg === "YES") {
+    request.open("DELETE", "/dashboard/" + captionId);
+    request.send();
+    window.location.reload();
+  }
+}

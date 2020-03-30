@@ -473,6 +473,7 @@ body {
   background-color: #ff3737;
   mask: url(../imgs/trash.svg) no-repeat center;
   -webkit-mask: url(../imgs/trash.svg) no-repeat center;
+  cursor: pointer;
 }
 
 /* Edit Caption */
