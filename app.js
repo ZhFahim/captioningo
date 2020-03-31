@@ -17,7 +17,8 @@ require("dotenv").config();
 // DB config
 mongoose.connect(process.env.DB_HOST, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 // Passport Config

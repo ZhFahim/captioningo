@@ -46,6 +46,7 @@
         </form>
       </div>
       <!-- Caption List -->
+      <% if (captions.length > 0) { %>
       <div class="captions">
         <table>
           <thead>
@@ -79,6 +80,11 @@
           </li>
         <% } %>
       </ul>
+      <% } else { %>
+        <div class="nocaption">
+          <h4>No Caption Found!</h4>
+        </div>
+      <% } %>
     </div>
   </div>
 </div>

@@ -13,8 +13,12 @@ router.get("/", function(req, res) {
     } else {
       // Update Total Hits
       Info.findOne({ name: "Hits" }, function(err, foundInfo) {
-        foundInfo.value++;
-        foundInfo.save();
+        if (err || !foundInfo) {
+          console.log(err);
+        } else {
+          foundInfo.value++;
+          foundInfo.save();
+        }
       });
       // Generate random caption
       var randomNum = Math.floor(Math.random() * captions.length);
@@ -47,33 +51,33 @@ router.get("/browse", function(req, res) {
   var pages = 1;
   Caption.countDocuments(query, function(err, count) {
     pages = Math.ceil(count / 10); // Each page has 10 captions
+    // Get current page
+    var currentPage = 1;
+    if (req.query.page) {
+      currentPage = req.query.page;
+    }
+    // Fetch captions based on query
+    Caption.find(query)
+      .limit(10)
+      .skip((currentPage - 1) * 10)
+      .sort({ $natural: -1 })
+      .exec(function(err, captions) {
+        if (err) {
+          console.log(err);
+        } else {
+          // Render browse page based on query
+          res.render("browse", {
+            captions: captions,
+            categories: categories,
+            pages: pages,
+            currentPage: currentPage,
+            queryText: req.query.text,
+            queryCategory: req.query.category,
+            page: "browse"
+          });
+        }
+      });
   });
-  // Get current page
-  var currentPage = 1;
-  if (req.query.page) {
-    currentPage = req.query.page;
-  }
-  // Fetch captions based on query
-  Caption.find(query)
-    .limit(10)
-    .skip((currentPage - 1) * 10)
-    .sort({ $natural: -1 })
-    .exec(function(err, captions) {
-      if (err) {
-        console.log(err);
-      } else {
-        // Render browse page based on query
-        res.render("browse", {
-          captions: captions,
-          categories: categories,
-          pages: pages,
-          currentPage: currentPage,
-          queryText: req.query.text,
-          queryCategory: req.query.category,
-          page: "browse"
-        });
-      }
-    });
 });
 
 // Update usedBy property route
@@ -127,10 +131,18 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
           }
         ],
         function(err, usedByResults) {
-          statics.totalUsedBy = usedByResults[0].totalUsedBy;
+          if (err || !usedByResults[0]) {
+            console.log(err);
+          } else {
+            statics.totalUsedBy = usedByResults[0].totalUsedBy;
+          }
           // Total Hits
           Info.findOne({ name: "Hits" }, function(err, foundInfo) {
-            statics.totalHits = foundInfo.value;
+            if (err || !foundInfo) {
+              console.log(err);
+            } else {
+              statics.totalHits = foundInfo.value;
+            }
             // Display Captions
             // Retrive all categories from DB
             var categories;
@@ -154,34 +166,34 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
             var pages = 1;
             Caption.countDocuments(query, function(err, count) {
               pages = Math.ceil(count / 10); // Each page has 10 captions
+              // Get current page
+              var currentPage = 1;
+              if (req.query.page) {
+                currentPage = req.query.page;
+              }
+              // Fetch captions based on query
+              Caption.find(query)
+                .limit(10)
+                .skip((currentPage - 1) * 10)
+                .sort({ $natural: -1 })
+                .exec(function(err, captions) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    // Serve statics and captions based on query
+                    res.render("dashboard", {
+                      statics: statics,
+                      captions: captions,
+                      categories: categories,
+                      pages: pages,
+                      currentPage: currentPage,
+                      queryText: req.query.text,
+                      queryCategory: req.query.category,
+                      page: "dashboard"
+                    });
+                  }
+                });
             });
-            // Get current page
-            var currentPage = 1;
-            if (req.query.page) {
-              currentPage = req.query.page;
-            }
-            // Fetch captions based on query
-            Caption.find(query)
-              .limit(10)
-              .skip((currentPage - 1) * 10)
-              .sort({ $natural: -1 })
-              .exec(function(err, captions) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  // Serve statics and captions based on query
-                  res.render("dashboard", {
-                    statics: statics,
-                    captions: captions,
-                    categories: categories,
-                    pages: pages,
-                    currentPage: currentPage,
-                    queryText: req.query.text,
-                    queryCategory: req.query.category,
-                    page: "dashboard"
-                  });
-                }
-              });
           });
         }
       );
@@ -194,6 +206,7 @@ router.post("/dashboard", isLoggedIn, function(req, res) {
   Caption.create(req.body, function(err, caption) {
     if (err) {
       console.log(err);
+      res.redirect("back");
     } else {
       // Redirect to dashboard
       res.redirect("/dashboard");

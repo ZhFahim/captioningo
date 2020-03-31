@@ -1,7 +1,13 @@
-var mongoose = require("mongoose");
+var mongoose = require("mongoose"),
+  uniqueValidator = require("mongoose-unique-validator");
 
 var captionSchema = new mongoose.Schema({
-  text: String,
+  text: {
+    type: String,
+    required: true,
+    unique: true,
+    uniqueCaseInsensitive: true
+  },
   author: String,
   category: String,
   usedBy: {
@@ -14,5 +20,7 @@ var captionSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+captionSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("Caption", captionSchema);
