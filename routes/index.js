@@ -214,6 +214,18 @@ router.post("/dashboard", isLoggedIn, function(req, res) {
   });
 });
 
+// Send category list
+router.get("/categories", function(req, res) {
+  var query = new RegExp(escapeRegex(req.query.s), "gi");
+  Caption.distinct("category", { category: query }, function(err, categories) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(categories);
+    }
+  });
+});
+
 // Edit Caption Page
 router.get("/dashboard/edit/:id", isLoggedIn, function(req, res) {
   // Fetch all categories

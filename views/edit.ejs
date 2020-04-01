@@ -7,16 +7,18 @@
     method="POST"
   >
     <textarea name="text"><%= caption.text %></textarea>
-    <select name="category">
-      <% if (categories) { %>
-        <% categories.forEach(function(category) { %>
-        <option value="<%= category %>" <% if (category === caption.category) { %>
-          <%= "selected" %>
-          <% } %> ><%= category %>
-        </option>
-        <% }) %> 
-      <% } %>
-    </select>
+    <div class="category-suggestion">
+      <input
+        id="category-input"
+        name="category"
+        type="text"
+        value="<%= caption.category %>"
+        placeholder="Category"
+        autocomplete="off"
+        required
+      />
+      <div id="suggestion-box"></div>
+    </div>
     <button>Edit</button>
   </form>
 </div>
