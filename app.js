@@ -36,8 +36,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Requring Routes
-var routes = require("./routes/index");
-app.use("/", routes);
+var indexRoutes = require("./routes/index"),
+  captionRoutes = require("./routes/captions"),
+  dashboardRoutes = require("./routes/dashboard");
+app.use("/", indexRoutes);
+app.use("/", captionRoutes);
+app.use("/", dashboardRoutes);
 
 // Run server
 var port = process.env.PORT;
