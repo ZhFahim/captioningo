@@ -43,6 +43,11 @@ app.use("/", indexRoutes);
 app.use("/", captionRoutes);
 app.use("/", dashboardRoutes);
 
+// 404 page
+app.get("*", function(req, res) {
+  res.status("404").render("404");
+});
+
 // Run server
 var port = process.env.PORT;
 if (port == null || port == "") {
